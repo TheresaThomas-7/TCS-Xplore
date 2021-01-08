@@ -1,0 +1,106 @@
+import java.util.Scanner;
+public class Solution 
+{  
+    public static void main(String[] args) 
+    {
+        Player[] player=new Player[4];
+        Scanner sc=new Scanner(System.in);
+        for(int i=0;i<player.length;i++)
+        {
+            int playerId=sc.nextInt(); sc.nextLine();
+            String playerName=sc.nextLine();
+            int iccRank=sc.nextInt(); sc.nextLine();
+            int noOfMatchesPlayed=sc.nextInt(); sc.nextLine();
+            int totalRunsScored=sc.nextInt(); sc.nextLine();
+            player[i]=new Player(playerId,playerName,iccRank,noOfMatchesPlayed,totalRunsScored);
+        }
+        //Read values and call methods
+        int totalMatches=sc.nextInt(); sc.nextLine();
+        double[] averageRunRate=findAverageScoreOfPlayers(player,totalMatches);
+        for(double i:averageRunRate)
+        {
+            if(i!=0)
+            {
+                if(i>=80){
+                    System.out.println("Grade A Player");
+                }
+                else if(i>=50 && i<80){
+                    System.out.println("Grade B Player");                    
+                }
+                else{
+                    System.out.println("Grade C Player");                    
+                }                
+            }
+        }        
+    }
+    public static double[] findAverageScoreOfPlayers(Player[] player,int totalMatches)
+    {
+        double averageRunRate[]=new double[4];
+        int k=0;
+        for(int i=0;i<player.length;i++)
+        {
+            if(player[i].getNoOfMatchesPlayed() >= totalMatches)
+            {
+                averageRunRate[k++]=player[i].getTotalRunsScored()/player[i].getNoOfMatchesPlayed();
+            }
+        }
+        return averageRunRate;        
+    }
+}
+class Player
+{
+    private int playerId;
+    private String playerName;
+    private int iccRank;
+    private int noOfMatchesPlayed;
+    private int totalRunsScored;
+    
+    public Player(int playerId, String playerName, int iccRank, int noOfMatchesPlayed, int totalRunsScored)
+    {
+        this.playerId=playerId;
+        this.playerName=playerName;
+        this.iccRank=iccRank;
+        this.noOfMatchesPlayed=noOfMatchesPlayed;
+        this.totalRunsScored=totalRunsScored;
+    }
+    public int getPlayerId()
+    {
+        return playerId;
+    }
+    public void setPlayerId(int playerId)
+    {
+        this.playerId=playerId;
+    }
+    public String getPlayerName()
+    {
+        return playerName;
+    }
+    public void setPlayerName(String playerName)
+    {
+        this.playerName=playerName;
+    }
+    public int getIccRank()
+    {
+        return iccRank;
+    }
+    public void setIccRank(int iccRank)
+    {
+        this.iccRank=iccRank;
+    }
+    public int getNoOfMatchesPlayed()
+    {
+        return noOfMatchesPlayed;
+    }    
+    public void setNoOfMatchesPlayed(int noOfMatchesPlayed)
+    {
+        this.noOfMatchesPlayed=noOfMatchesPlayed;
+    }
+    public int getTotalRunsScored()
+    {
+        return totalRunsScored;
+    }
+    public void setTotalRunsScored(int totalRunsScored)
+    {
+        this.totalRunsScored=totalRunsScored;
+    }
+}
